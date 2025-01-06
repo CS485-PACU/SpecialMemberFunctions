@@ -75,7 +75,6 @@ Example::~Example() {
 	if (nullptr != mpInt) {
 		delete mpInt;
 		mpInt = nullptr;
-		std::cout<< " - free - ";
 	}
 	std::cout << "Example::dtor() : " << mID << "\n";
 }
