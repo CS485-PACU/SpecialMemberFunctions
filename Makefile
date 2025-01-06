@@ -31,7 +31,7 @@ bin:
 	mkdir -p bin
 
 bin/main: bin src/*.cpp include/*.h
-	${compiler} -std=${CPP_VERSION} -o bin/main -g -Wall src/*.cpp -Iinclude
+	${compiler} -std=${CPP_VERSION} -o bin/main -g -Wall src/*.cpp -Iinclude -O0
 
 valgrind: bin/main
 	valgrind ${VALGRIND_FLAGS} bin/main
