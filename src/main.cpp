@@ -1,10 +1,10 @@
 //***************************************************************************
 // File name:   main.cpp
-// Author:      
-// Date:        
-// Class:       
+// Author:      chadd williams
+// Date:        1/6/2025
+// Class:       CS 485
 // Assignment:  
-// Purpose:     
+// Purpose:     demonstrate special member functions
 //***************************************************************************
 
 #include <iostream>
@@ -13,17 +13,43 @@
 #include <sstream>
 #include "../include/Example.h"
 
-
+//***************************************************************************
+// Function:    passByValue
+//
+// Description: demonstrate pass by value
+//
+// Parameters:  cExParam - pass by value object
+//
+// Returned:    None
+//***************************************************************************
 void passByValue(Example cExParam) {
 	std::cout << "passByValue\n";
 	std::cout << cExParam;
 }
 
+//***************************************************************************
+// Function:    passByReference
+//
+// Description: demonstrate pass by reference
+//
+// Parameters:  rcExParam - pass by reference object
+//
+// Returned:    None
+//***************************************************************************
 void passByReference(Example &rcExParam) {
 	std::cout << "passByReference\n";
 	std::cout << rcExParam;
 }
 
+//***************************************************************************
+// Function:    returnExample
+//
+// Description: demonstrate returning a copy
+//
+// Parameters:  None
+//
+// Returned:    a copy of local object
+//***************************************************************************
 Example returnExample() {
 	Example cERetVal(485);
 	std::cout << "returnExample\n";

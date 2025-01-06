@@ -79,7 +79,6 @@ Example::~Example() {
 	std::cout << "dtor() : " << mID << "\n";
 }
 
-
 //***************************************************************************
 // Method: 			operator=
 //
@@ -99,6 +98,16 @@ Example& Example::operator=(const Example &rcObj) {
 	return *this;
 }
 
+//***************************************************************************
+// Method: 			operator<<
+//
+// Description: insertion operator
+//
+// Parameters:  rcOut - the stream to write to
+//							rcObj - the object to write
+//
+// Returned:    the stream that was written to
+//***************************************************************************
 std::ostream& operator<<(std::ostream& rcOut, const Example &rcObj)
 {
 	rcOut << "Example: ";
