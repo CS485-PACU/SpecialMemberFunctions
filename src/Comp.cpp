@@ -1,5 +1,5 @@
 //***************************************************************************
-// File name:   Example.cpp
+// File name:   Comp.cpp
 // Author:      
 // Date:        1/6/2025
 // Class:       CS 485
@@ -7,13 +7,13 @@
 // Purpose:     Demonstrate special member functions
 //***************************************************************************
 
-#include "../include/Example.h"
+#include "../include/Comp.h"
 #include <iostream>
 
-int Example::counter = 0;
+int Comp::counter = 0;
 
 //***************************************************************************
-// Constructor:  Example
+// Constructor:  Comp
 //
 // Description: Create object
 //
@@ -21,14 +21,13 @@ int Example::counter = 0;
 //
 // Returned:    None
 //***************************************************************************
-Example::Example() {
-	mpInt = nullptr;
+Comp::Comp() {
 	mID = counter++;
-	std::cout << "Example::ctor() : " << mID << "\n";
+	std::cout << "Comp::ctor() : " << mID << "\n";
 }
 
 //***************************************************************************
-// Constructor: Example
+// Constructor: Comp
 //
 // Description: Create object
 //
@@ -36,15 +35,13 @@ Example::Example() {
 //
 // Returned:    None
 //***************************************************************************
-Example::Example(int value) {
-	mpInt = new int;
-	*mpInt = value;
+Comp::Comp(int value) : mcEx(value) {
 	mID = counter++;
-	std::cout << "Example::ctor(int) : " << mID << "\n";
+	std::cout << "Comp::ctor(int) : " << mID << "\n";
 }
 
 //***************************************************************************
-// Constructor: Example
+// Constructor: Comp
 //
 // Description: Copy Constructor
 //
@@ -52,18 +49,13 @@ Example::Example(int value) {
 //
 // Returned:    None
 //***************************************************************************
-Example::Example(const Example &rcObj) {
-	mpInt = nullptr;
-	if (nullptr != rcObj.mpInt) {
-		mpInt = new int;
-		*mpInt = *rcObj.mpInt;
-	}
+Comp::Comp(const Comp &rcObj) : mcEx(rcObj.mcEx) {
 	mID = counter++;
-	std::cout << "Example::cctor() : " << mID << "\n";
+	std::cout << "Comp::cctor() : " << mID << "\n";
 }
 
 //***************************************************************************
-// Destructor: Example
+// Destructor: Comp
 //
 // Description: Destroy object, free memory
 //
@@ -71,13 +63,8 @@ Example::Example(const Example &rcObj) {
 //
 // Returned:    None
 //***************************************************************************
-Example::~Example() {
-	if (nullptr != mpInt) {
-		delete mpInt;
-		mpInt = nullptr;
-		std::cout<< " - free - ";
-	}
-	std::cout << "Example::dtor() : " << mID << "\n";
+Comp::~Comp() {
+	std::cout << "Comp::dtor() : " << mID << "\n";
 }
 
 //***************************************************************************
@@ -89,17 +76,9 @@ Example::~Example() {
 //
 // Returned:    None
 //***************************************************************************
-Example& Example::operator=(const Example &rcObj) {
-	if (nullptr != mpInt) {
-		delete mpInt;
-		mpInt = nullptr;
-	}
-	
-	if (nullptr != rcObj.mpInt) {
-		mpInt = new int;
-		*mpInt = *rcObj.mpInt;
-	}
-	std::cout << "Example::op=() : " << mID << " = " << rcObj.mID << "\n";
+Comp& Comp::operator=(const Comp &rcObj) {
+	mcEx = rcObj.mcEx;
+	std::cout << "Comp::op=() : " << mID << " = " << rcObj.mID << "\n";
 	return *this;
 }
 
@@ -113,14 +92,10 @@ Example& Example::operator=(const Example &rcObj) {
 //
 // Returned:    the stream that was written to
 //***************************************************************************
-std::ostream& operator<<(std::ostream& rcOut, const Example &rcObj)
+std::ostream& operator<<(std::ostream& rcOut, const Comp &rcObj)
 {
-	rcOut << "Example: ";
-	if (nullptr != rcObj.mpInt) {
-		rcOut << *rcObj.mpInt;
-	} else {
-		rcOut << "nullptr";
-	}
+	rcOut << "Comp: ";
+	rcOut << rcObj.mcEx;
 	rcOut << std::endl;
 	return rcOut;
 }

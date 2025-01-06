@@ -7,7 +7,7 @@
 # Purpose:    
 #############################################################################
 
-all: bin bin/main
+all: bin bin/main # bin/compMain
 
 ENSCRIPT_FLAGS=-C -T 2 -p - -M Letter -Ecpp --color -fCourier8
 VALGRIND_FLAGS=-v --leak-check=yes --track-origins=yes --leak-check=full --show-leak-kinds=all 
@@ -30,8 +30,23 @@ CPP_VERSION=c++2b
 bin:
 	mkdir -p bin
 
-bin/main: bin src/*.cpp include/*.h
-	${compiler} -std=${CPP_VERSION} -o bin/main -g -Wall src/*.cpp -Iinclude -O0
+bin/Example.o: src/Example.cpp include/Example.h
+	${compiler} -std=${CPP_VERSION} -c -o bin/Example.o -g -Wall src/Example.cpp -Iinclude -O0
+
+bin/Comp.o: src/Comp.cpp include/Comp.h include/Example.h
+	${compiler} -std=${CPP_VERSION} -c -o bin/Comp.o -g -Wall src/Comp.cpp -Iinclude -O0
+
+bin/main.o: src/main.cpp include/Example.h
+	${compiler} -std=${CPP_VERSION} -c -o bin/main.o -g -Wall src/main.cpp -Iinclude -O0
+
+bin/main: bin bin/main.o bin/Example.o
+	${compiler} -std=${CPP_VERSION} -o bin/main -g -Wall bin/main.o bin/Example.o -O0
+
+bin/compMain.o: src/compMain.cpp include/Example.h include/Comp.h
+	${compiler} -std=${CPP_VERSION} -c -o bin/compMain.o -g -Wall src/compMain.cpp -Iinclude -O0
+
+bin/compMain: bin bin/compMain.o bin/Example.o bin/Comp.o
+	${compiler} -std=${CPP_VERSION} -o bin/compMain -g -Wall bin/compMain.o bin/Example.o bin/Comp.o -O0
 
 valgrind: bin/main
 	valgrind ${VALGRIND_FLAGS} bin/main
