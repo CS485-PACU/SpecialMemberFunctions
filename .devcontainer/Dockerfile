@@ -20,5 +20,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 		poppler-utils acl clang-16
     # ltrace
 
-# RUN wget http://http.us.debian.org/debian/pool/main/v/valgrind/valgrind_3.20.0-2.1_arm64.deb && sudo apt install ./valgrind_3.20.0-2.1_arm64.deb 
-RUN wget http://http.us.debian.org/debian/pool/main/v/valgrind/valgrind_3.20.0-2.1_amd64.deb && sudo apt install ./valgrind_3.20.0-2.1_amd64.deb 
+# RUN wget http://http.us.debian.org/debian/pool/main/v/valgrind/valgrind_3.20.0-2.1_arm64.deb && sudo apt-get -y install ./valgrind_3.20.0-2.1_arm64.deb 
+RUN wget http://http.us.debian.org/debian/pool/main/v/valgrind/valgrind_3.20.0-2.1_amd64.deb && \
+ sudo apt-get -y install ./valgrind_3.20.0-2.1_amd64.deb && \
+rm -rf ./valgrind_3.20.0-2.1_amd64.deb
