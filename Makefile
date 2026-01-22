@@ -12,13 +12,12 @@ all: bin bin/main # bin/compMain
 ENSCRIPT_FLAGS=-C -T 2 -p - -M Letter -Ecpp --color -fCourier8
 VALGRIND_FLAGS=-v --leak-check=yes --track-origins=yes --leak-check=full --show-leak-kinds=all 
 
-compiler=clang++-16
+compiler=clang++
 #compiler=g++
 
 # clang
 # https://clang.llvm.org/cxx_status.html
-# clang 16 still uses c++2b to represent c++23
-CPP_VERSION=c++2b
+CPP_VERSION=c++23
 
 # g++ (Linux)
 # Version 10 or later
